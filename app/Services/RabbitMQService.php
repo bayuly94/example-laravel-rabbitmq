@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use PhpAmqpLib\Connection\AMQPConnectionConfig;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Connection\AMQPSSLConnection;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -10,7 +11,18 @@ class RabbitMQService
 {
     public function publish($message)
     {
-        $connection = new AMQPStreamConnection(env('RABBITMQ_HOST'), env('RABBITMQ_PORT'), env('RABBITMQ_USER'), env('RABBITMQ_PASSWORD'), env('RABBITMQ_VHOST'));
+
+        $sslOptions = [
+            'verify_peer' => false
+        ];
+
+        $connection = new AMQPSSLConnection(env('RABBITMQ_HOST'),
+            env('RABBITMQ_PORT'),
+            env('RABBITMQ_USER'),
+            env('RABBITMQ_PASSWORD'),
+            env('RABBITMQ_VHOST'),
+            $sslOptions,
+        );
         $channel = $connection->channel();
         $channel->exchange_declare('test_exchange', 'direct', false, false, false);
         $channel->queue_declare('test_queue', false, false, false, false);
@@ -23,7 +35,18 @@ class RabbitMQService
     }
     public function consume()
     {
-        $connection = new AMQPStreamConnection(env('RABBITMQ_HOST'), env('RABBITMQ_PORT'), env('RABBITMQ_USER'), env('RABBITMQ_PASSWORD'), env('RABBITMQ_VHOST'));
+
+        $sslOptions = [
+            'verify_peer' => false
+        ];
+
+        $connection = new AMQPSSLConnection(env('RABBITMQ_HOST'),
+            env('RABBITMQ_PORT'),
+            env('RABBITMQ_USER'),
+            env('RABBITMQ_PASSWORD'),
+            env('RABBITMQ_VHOST'),
+            $sslOptions,
+        );
         $channel = $connection->channel();
         $callback = function ($msg) {
             echo ' [x] Received ', $msg->body, "\n";

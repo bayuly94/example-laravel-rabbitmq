@@ -3,6 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+use Enqueue\AmqpLib\AmqpConnectionFactory;
+use Enqueue\ConnectionFactoryFactory;
+use Interop\Amqp\AmqpTopic;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,3 +29,5 @@ Route::post("/message", function (Request $request) {
     $mqService->publish($message);
     return view('welcome');
 });
+
+
