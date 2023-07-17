@@ -12,6 +12,7 @@
 <body class="antialiased">
     <div class="h-[100vh] flex justify-center items-center ">
         <form action="/api/message" method="post" class="w-[700px]">
+
             <textarea class="border border-gray-300 w-full rounded-[10px] min-h-[300px] p-4" placeholder="enter message" name="message" id="message"></textarea>
             <button class="bg-blue-500 px-10 py-[12px] rounded-[10px] text-white mt-2">Send message</button>
         </form>

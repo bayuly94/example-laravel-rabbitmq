@@ -1,0 +1,28 @@
+{
+    "_id": "5dc0b566-630b-40b3-8805-8f9ae782ef25",
+    "colName": "send message",
+    "created": "2023-07-12T11:31:56.142Z",
+    "sortNum": 10000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "23b293c1-cae1-4397-9acb-eaa2a059a48d",
+            "colId": "5dc0b566-630b-40b3-8805-8f9ae782ef25",
+            "containerId": "",
+            "name": "sendmessage",
+            "url": "http://localhost:9191/api/message",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-07-12T11:32:07.276Z",
+            "modified": "2023-07-12T11:45:10.284Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\":\"hebat\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

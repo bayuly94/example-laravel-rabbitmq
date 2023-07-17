@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use App\Services\RabbitMQService;
 use Illuminate\Console\Command;
 
+use Laravel\Octane\Facades\Octane;
+
 class RabbitMQComsumeCmd extends Command
 {
     /**
@@ -26,7 +28,20 @@ class RabbitMQComsumeCmd extends Command
      */
     public function handle()
     {
-        $mqService = new RabbitMQService();
-        $mqService->consume();
+        $ocrtane = Octane::concurrently([
+            fn () => $this->_run("outlet3"),
+            fn () => $this->_run("outlet2"),
+            fn () => $this->_run("outlet1"),
+
+        ]);
+    }
+
+
+    private function _run($uid)
+    {
+        $ser_name = "service_" . $uid;
+
+       $$ser_name = new RabbitMQService($uid);
+       $$ser_name->consume();
     }
 }

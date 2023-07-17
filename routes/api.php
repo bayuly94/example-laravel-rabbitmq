@@ -24,7 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post("/message", function (Request $request) {
-    $message = $_POST['message'];
+
+    $message = $request->message;
     $mqService = new \App\Services\RabbitMQService();
     $mqService->publish($message);
     return view('welcome');
